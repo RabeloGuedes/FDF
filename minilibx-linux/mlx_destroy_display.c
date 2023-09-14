@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_power.c                                         :+:      :+:    :+:   */
+/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/05 08:42:49 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/12 12:22:53 by arabelo-         ###   ########.fr       */
+/*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
+/*   Updated: 2020/10/04 01:55:35 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "mlx_int.h"
 
-int	ft_power(int nb, int power)
+int	mlx_destroy_display(t_xvar *xvar)
 {
-	int	res;
-
-	res = 1;
-	if (power < 0)
-		return (0);
-	if (!nb && !power)
-		return (1);
-	while (power--)
-		res *= nb;
-	return (res);
+	XCloseDisplay(xvar->display);
 }

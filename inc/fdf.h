@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_power.c                                         :+:      :+:    :+:   */
+/*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/05 08:42:49 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/12 12:22:53 by arabelo-         ###   ########.fr       */
+/*   Created: 2023/09/12 12:23:08 by arabelo-          #+#    #+#             */
+/*   Updated: 2023/09/12 12:23:18 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#ifndef FDF_H
+# define FDF_H
 
-int	ft_power(int nb, int power)
-{
-	int	res;
+# include "../libft/inc/libft.h"
 
-	res = 1;
-	if (power < 0)
-		return (0);
-	if (!nb && !power)
-		return (1);
-	while (power--)
-		res *= nb;
-	return (res);
-}
+#endif
