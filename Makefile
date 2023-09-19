@@ -13,7 +13,7 @@ INC_FLAGS = -I ./inc -I $(LIBFT_DIR)/inc -I $(MINILIBX_DIR)/
 PROGRAM_LIBS = -L$(LIBFT_DIR) -lft -L$(MINILIBX_DIR) -lmlx -L -lm
 
 SRC_DIR = src
-SRC_FILES = free_matrix.c parse_map.c handle_file_manipulation.c
+SRC_FILES = free_matrix.c parse_map.c handle_file_manipulation.c window.c
 
 OBJ_DIR = obj
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC_FILES:%.c=%.o))
