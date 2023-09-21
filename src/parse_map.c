@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:45:41 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/21 17:33:55 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:29:16 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	generate_lines(int fd)
 {
 	char	*line;
-	size_t	lines_amount;
+	int		lines_amount;
 	t_list	*node;
 
 	lines_amount = 0;

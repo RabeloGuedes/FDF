@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 11:57:56 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/21 17:13:21 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/21 17:52:08 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,9 @@
 
 int	main(int ac, char **av)
 {
-	t_list	*line;
-
 	if (ac == 2)
 	{
 		get_matrix(av[1]);
-		line = map()->file_begin;
-		while (line)
-		{
-			ft_printf("%s", line->content);
-			line = line->next;
-		}
 		window();
 		ft_lstclear(&(map()->file_begin), free);
 	}

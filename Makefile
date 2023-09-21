@@ -13,7 +13,7 @@ INC_FLAGS = -I ./inc -I $(LIBFT_DIR)/inc -I $(MINILIBX_DIR)/
 PROGRAM_LIBS = -L$(LIBFT_DIR) -lft -L$(MINILIBX_DIR) -lmlx_Linux -L/usr/lib -lXext -lX11 -lz -lm 
 
 SRC_DIR = src
-SRC_FILES = free_matrix.c parse_map.c handle_file_manipulation.c window.c map.c\
+SRC_FILES = parse_map.c handle_file_manipulation.c window.c map.c\
 			handle_error.c
 
 OBJ_DIR = obj

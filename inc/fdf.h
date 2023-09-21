@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 12:23:08 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/21 16:41:07 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:28:36 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,16 @@
 
 typedef struct s_matrix_infos
 {
-	size_t	lines_amount;
-	size_t	columns_amount;
+	int		lines_amount;
+	int		columns_amount;
 	void	*mlx;
 	void	*mlx_win;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		endian;
 	t_list	*file_begin;
 }				t_matrix;
-
 
 // window
 void		window(void);
@@ -47,7 +50,6 @@ void		handle_close(int fd);
 // files management
 
 // utils
-void		free_matrix(char **matrix);
 t_matrix	*map(void);
 void		malloc_error(void);
 // utils
