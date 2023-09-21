@@ -6,13 +6,13 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:54:31 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/07/24 14:56:11 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/20 19:17:03 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/get_next_line.h"
 
-size_t	ft_strlen(char *s)
+size_t	ft_strlen_gnl(char *s)
 {
 	size_t	i;
 
@@ -46,8 +46,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	char	*join;
 	int		i;
 
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
+	s1_len = ft_strlen_gnl(s1);
+	s2_len = ft_strlen_gnl(s2);
 	join = (char *)malloc(sizeof(char) * (s1_len + s2_len) + 1);
 	if (!join)
 		return (NULL);

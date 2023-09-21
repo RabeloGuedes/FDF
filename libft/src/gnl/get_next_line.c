@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:54:34 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/07/24 14:56:00 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/20 19:17:41 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*get_one_line(char *buffer)
 	char	*line;
 
 	i = 0;
-	if (!ft_strlen(buffer))
+	if (!ft_strlen_gnl(buffer))
 		return (NULL);
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
@@ -91,7 +91,7 @@ char	*update_new_buffer(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	new_buffer = (char *)malloc(sizeof(char) * (ft_strlen(buffer) - i) + 1);
+	new_buffer = (char *)malloc(sizeof(char) * (ft_strlen_gnl(buffer) - i) + 1);
 	if (!new_buffer)
 		return (NULL);
 	j = 0;
