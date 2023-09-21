@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 12:23:08 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/21 09:31:37 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/21 16:41:07 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,16 @@ typedef struct s_matrix_infos
 	size_t	columns_amount;
 	void	*mlx;
 	void	*mlx_win;
-	char	**map;
+	t_list	*file_begin;
 }				t_matrix;
+
 
 // window
 void		window(void);
 // window
 
 // parse maps
+void		generate_lines(int fd);
 void		get_matrix(char *file_name);
 void		save_matrix(int fd);
 size_t		count_file_lines(int fd);

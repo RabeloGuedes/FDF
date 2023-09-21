@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 11:57:56 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/21 09:25:04 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/21 17:13:21 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 int	main(int ac, char **av)
 {
-	int	i;
+	t_list	*line;
 
-	i = 0;
 	if (ac == 2)
 	{
-		map = get_matrix(av[1]);
-		while (map()->map[i])
+		get_matrix(av[1]);
+		line = map()->file_begin;
+		while (line)
 		{
-			ft_printf("Line %i: %s", i + 1, map()->map[i]);
-			i++;
+			ft_printf("%s", line->content);
+			line = line->next;
 		}
 		window();
-		free_matrix(map()->map);
+		ft_lstclear(&(map()->file_begin), free);
 	}
 	else
 		ft_putendl_fd("Error: Usage -> ./fdf \"file_name\"", 2);
