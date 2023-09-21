@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:45:41 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/19 15:24:42 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/20 19:21:04 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,47 +25,45 @@ size_t	count_file_lines(int fd)
 		line = get_next_line(fd);
 		lines++;
 	}
-	handle_close(fd, NULL);
+	handle_close(fd);
 	return (lines);
 }
 
-char	**save_matrix(int fd, t_matrix *matrix_infos)
+void	save_matrix(int fd)
 {
-	char	**matrix;
 	size_t	i;
 
 	i = 0;
-	matrix = (char **)malloc(sizeof(char *) * (matrix_infos->lines_amount + 1));
-	if (!matrix)
-		return (NULL);
-	while (i < matrix_infos->lines_amount)
+	map()->map = (char **)malloc(sizeof(char *) * (map()->lines_amount + 1));
+	if (!map()->map)
+		exit(EXIT_FAILURE);
+	while (i < map()->lines_amount)
 	{
-		matrix[i] = get_next_line(fd);
-		if (!matrix[i])
+		map()->map[i] = get_next_line(fd);
+		if (!map()->map[i])
 		{
-			free_matrix(matrix);
-			return (NULL);
+			free_matrix(map()->map);
+			malloc_error();
 		}
 		i++;
 	}
-	matrix[i] = NULL;
-	return (matrix);
+	map()->map[i] = NULL;
 }
 
-char	**get_matrix(char *file_name, t_matrix *matrix_infos)
+void	get_matrix(char *file_name)
 {
 	int		fd;
-	char	**matrix;
 
 	fd = handle_open(file_name);
-	matrix_infos->lines_amount = count_file_lines(fd);
+	map()->lines_amount = count_file_lines(fd);
 	fd = handle_open(file_name);
-	matrix = save_matrix(fd, matrix_infos);
-	if (!matrix)
+	save_matrix(fd);
+	if (!map()->map)
 	{
 		ft_putendl_fd("Error: Memory allocation failed! Exiting...", 2);
 		exit(EXIT_FAILURE);
 	}
-	handle_close(fd, matrix);
-	return (matrix);
+	handle_close(fd);
+	map()->columns_amount = ft_strlen(map()->map[0]);
+	ft_printf("columns_amount: %u\n", map()->columns_amount);
 }

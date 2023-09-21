@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 12:23:08 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/19 15:17:46 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/21 09:31:37 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,33 @@
 # include <fcntl.h>
 # include <errno.h>
 
-typedef struct	s_matrix_infos
+typedef struct s_matrix_infos
 {
 	size_t	lines_amount;
 	size_t	columns_amount;
 	void	*mlx;
 	void	*mlx_win;
+	char	**map;
 }				t_matrix;
 
-
 // window
-void	window(t_matrix *matrix_infos);
+void		window(void);
 // window
 
 // parse maps
-char	**get_matrix(char *file_name, t_matrix *matrix_infos);
-char	**save_matrix(int fd, t_matrix *matrix_infos);
-size_t	count_file_lines(int fd);
+void		get_matrix(char *file_name);
+void		save_matrix(int fd);
+size_t		count_file_lines(int fd);
 // parse maps
 
 // files management
-int		handle_open(char *file_name);
-void	handle_close(int fd, char **matrix);
+int			handle_open(char *file_name);
+void		handle_close(int fd);
 // files management
 
 // utils
-void	free_matrix(char **matrix);
+void		free_matrix(char **matrix);
+t_matrix	*map(void);
+void		malloc_error(void);
 // utils
 #endif

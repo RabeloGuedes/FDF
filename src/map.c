@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/16 11:57:56 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/21 09:25:04 by arabelo-         ###   ########.fr       */
+/*   Created: 2023/09/20 18:32:49 by arabelo-          #+#    #+#             */
+/*   Updated: 2023/09/20 20:20:14 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	main(int ac, char **av)
+t_matrix	*map(void)
 {
-	int	i;
+	static t_matrix	map;
 
-	i = 0;
-	if (ac == 2)
-	{
-		map = get_matrix(av[1]);
-		while (map()->map[i])
-		{
-			ft_printf("Line %i: %s", i + 1, map()->map[i]);
-			i++;
-		}
-		window();
-		free_matrix(map()->map);
-	}
-	else
-		ft_putendl_fd("Error: Usage -> ./fdf \"file_name\"", 2);
-	return (0);
+	return (&map);
 }

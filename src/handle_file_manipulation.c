@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 09:06:16 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/19 10:06:52 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/20 18:50:59 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int	handle_open(char *file_name)
 	return (fd);
 }
 
-void	handle_close(int fd, char **matrix)
+void	handle_close(int fd)
 {
 	if (close(fd) == -1)
 	{
-		free_matrix(matrix);
+		free_matrix(map()->map);
 		ft_putstr_fd("Error: File can't be closed, it might not exists! ", 2);
 		ft_putendl_fd("Exiting...", 2);
 		exit(EXIT_FAILURE);
