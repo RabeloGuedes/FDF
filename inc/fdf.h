@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 12:23:08 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/21 18:28:36 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/24 17:22:27 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,51 @@
 # include <fcntl.h>
 # include <errno.h>
 
+# ifndef LINUX_ESC_KEYCODE
+#  define LINUX_ESC_KEYCODE 65307
+# endif
+
+# ifndef KEY_PRESS_MASK
+#  define KEY_PRESS_MASK 1L<<0
+# endif
+
+enum
+{
+	ON_KEYDOWN = 2,
+	ON_DESTROY = 17
+};
+
+typedef struct s_node
+{
+	int				x;
+	int				y;
+	int				z;
+	long long		color;
+	struct s_node	*right;
+	struct s_node	*bottom;
+}			t_node;
+
 typedef struct s_matrix_infos
 {
 	int		lines_amount;
 	int		columns_amount;
+	int		win_h;
+	int		win_w;
 	void	*mlx;
 	void	*mlx_win;
 	void	*img;
 	char	*addr;
 	int		bpp;
 	int		endian;
+	t_node	*head;
+	t_node	*tail;
 	t_list	*file_begin;
 }				t_matrix;
 
 // window
 void		window(void);
+int			mouse_destroy_window(void);
+int			esc_window(int key_code);
 // window
 
 // parse maps
