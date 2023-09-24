@@ -6,12 +6,106 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:45:41 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/21 18:29:16 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/24 19:10:13 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+
+// This function creates a node with the coordenates
+t_node	*create_node(int altitude, int x, int y)
+{
+	t_node	*new;
+
+	new = (t_node *)malloc(sizeof(t_node));
+	if (!new)
+		return (NULL);
+	new->z = altitude;
+	new->x = x;
+	new->y = y;
+	new->right = NULL;
+	new->bottom = NULL;
+	return (new);
+}
+
+// This function searchs for the right line 
+// above the created node and returns it.
+t_node	*dig_and_search(int y)
+{
+	t_node	*head;
+
+	head = map()->head;
+	while (y - 1 != head->y)
+		head = head->bottom;
+	return (head);
+}
+
+// This function searchs for the right node at the
+// same column as the created node and returns it.
+t_node	search_on_the_right(t_node *node_above, int x)
+{
+	while (node_above->right && node_above->x < x)
+		node_above = node_above->right;
+	if (node_above->x != x)
+		return (NULL);
+	return (node_above);
+}
+
+// This function searchs for the right place to
+// bind the new created node.
+t_node	*shift_layers(int x)
+{
+	t_node	*head;
+
+	head = map()->head;
+	while (head->bottom)
+		head = head->bottom;
+	if (!x)
+		return (head);
+	while (head->right)
+		head = head->right;
+	return (head);
+}
+
+// This function binds the created
+// node with the node above it.
+void	connect_above_node(t_node *node)
+{
+	t_node	*node_above;
+
+	node_above = dig_and_search(node->y);
+	node_above = search_on_the_right(node_above, node->x);
+	if (!node_above)
+		return ;
+	node_above->bottom = node;
+}
+
+// This function adds the node to
+// the data structure.
+void	queue_add_node(t_node *node)
+{
+	t_node	*head;
+
+	head = map()->head;
+	if (!head)
+	{
+		map()->head = node;
+		map()->tail = node;
+	}
+	else
+	{
+		head = shift_layers(node->x);
+		if (!node->x)
+			head->bottom = node;
+		else
+			head->right = node;
+		if (node->y > 0)
+			connect_above_node(node);
+	}
+}
+
+// Deprecated
 void	generate_lines(int fd)
 {
 	char	*line;
@@ -39,6 +133,7 @@ void	generate_lines(int fd)
 	map()->lines_amount = lines_amount;
 }
 
+// Main function to build the data structure
 void	get_matrix(char *file_name)
 {
 	int		fd;
