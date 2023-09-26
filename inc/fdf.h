@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 12:23:08 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/24 17:22:27 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:52:20 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,7 @@ void		handle_close(int fd);
 // utils
 t_matrix	*map(void);
 void		malloc_error(void);
+void		free_split(char **array);
+void		free_nodes(void);
 // utils
 #endif

@@ -14,7 +14,7 @@ PROGRAM_LIBS = -L$(LIBFT_DIR) -lft -L$(MINILIBX_DIR) -lmlx_Linux -L/usr/lib -lXe
 
 SRC_DIR = src
 SRC_FILES = parse_map.c handle_file_manipulation.c window.c map.c\
-			handle_error.c destroy_window.c
+			handle_error.c destroy_window.c free_data_structures.c
 
 OBJ_DIR = obj
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC_FILES:%.c=%.o))
