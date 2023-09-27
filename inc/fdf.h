@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 12:23:08 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/26 17:52:20 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/27 18:20:31 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@
 
 # ifndef LINUX_ESC_KEYCODE
 #  define LINUX_ESC_KEYCODE 65307
-# endif
-
-# ifndef KEY_PRESS_MASK
-#  define KEY_PRESS_MASK 1L<<0
 # endif
 
 enum
@@ -57,7 +53,6 @@ typedef struct s_matrix_infos
 	int		bpp;
 	int		endian;
 	t_node	*head;
-	t_node	*tail;
 	t_list	*file_begin;
 }				t_matrix;
 
@@ -68,11 +63,21 @@ int			esc_window(int key_code);
 // window
 
 // parse maps
-void		generate_lines(int fd);
 void		get_matrix(char *file_name);
 void		save_matrix(int fd);
-size_t		count_file_lines(int fd);
+void		generate_lines(int fd);
+int			convert_line_into_coordinates(char **array, int y);
+void		generate_line_phase_1(char **line, char ***array);
+void		generate_line_phase_2(int fd, char **line, char ***array, int *y);
 // parse maps
+
+// queue
+void		queue_add_node(t_node *node);
+void		connect_above_node(t_node *node);
+t_node		*shift_layers(int x);
+t_node		*search_on_the_right(t_node *node_above, int x);
+t_node		*dig_and_search(int y);
+// queue
 
 // files management
 int			handle_open(char *file_name);
@@ -83,6 +88,8 @@ void		handle_close(int fd);
 t_matrix	*map(void);
 void		malloc_error(void);
 void		free_split(char **array);
+void		check_south(t_node	**head, t_node **previous);
+void		check_east(t_node **head, t_node **previous);
 void		free_nodes(void);
 // utils
 #endif
