@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 12:23:08 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/27 18:20:31 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/28 18:01:05 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_matrix_infos
 	int		columns_amount;
 	int		win_h;
 	int		win_w;
+	int		sf;
 	void	*mlx;
 	void	*mlx_win;
 	void	*img;
@@ -60,6 +61,7 @@ typedef struct s_matrix_infos
 void		window(void);
 int			mouse_destroy_window(void);
 int			esc_window(int key_code);
+void		window_init(void);
 // window
 
 // parse maps
@@ -72,6 +74,8 @@ void		generate_line_phase_2(int fd, char **line, char ***array, int *y);
 // parse maps
 
 // queue
+t_node		*create_node(int altitude, int x, int y, int color);
+int			build_node(char *str, int x, int y);
 void		queue_add_node(t_node *node);
 void		connect_above_node(t_node *node);
 t_node		*shift_layers(int x);

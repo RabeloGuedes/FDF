@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 11:57:56 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/27 17:34:59 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/28 17:47:04 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int ac, char **av)
 {
 	if (ac == 2)
 	{
+		window_init();
 		get_matrix(av[1]);
 		window();
 		free_nodes();

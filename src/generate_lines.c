@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 18:16:45 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/27 18:18:53 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/27 19:32:51 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	generate_line_phase_1(char **line, char ***array)
 {
-	if (!map()->columns_amount
-		|| (int)(ft_strlen(*line)) > map()->columns_amount)
-		map()->columns_amount = ft_strlen(*line);
 	if (!(*array))
 	{
 		free(*line);
