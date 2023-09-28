@@ -6,12 +6,15 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:45:41 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/28 18:00:21 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/28 18:38:17 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+// This function takes an array of strings
+// and converts the values of each element
+// into integers and put inside a node.
 int	convert_line_into_coordinates(char **array, int y)
 {
 	int	i;
@@ -46,6 +49,8 @@ void	display_nodes(void)
 	}
 }
 
+// This function calculates the scale factor
+// based on the window's and file's measurements
 void	get_scaling_factor(void)
 {
 	int	map_h;
@@ -63,6 +68,8 @@ void	get_scaling_factor(void)
 		map()->sf = sf_h;
 }
 
+// This function calls the scale factor function
+// to recalculate the new pixel distribuition
 void	expand_map(void)
 {
 	t_node	*current;

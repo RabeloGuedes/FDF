@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 17:48:43 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/28 18:02:06 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/28 18:33:57 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ t_node	*create_node(int altitude, int x, int y, int color)
 	return (new);
 }
 
+// This function checks if the node has some color
+// to be applied and creates the node with its
+// attribuites, as coordinates (x, y z) and color
+// as well as add the node into the data structure.
 int	build_node(char *str, int x, int y)
 {
 	char	**altitude_and_color;
