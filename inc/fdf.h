@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 12:23:08 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/28 18:01:05 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/29 09:47:02 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void		handle_close(int fd);
 
 // utils
 t_matrix	*map(void);
+int			file_name_checker(char *file_name);
 void		malloc_error(void);
 void		free_split(char **array);
 void		check_south(t_node	**head, t_node **previous);
