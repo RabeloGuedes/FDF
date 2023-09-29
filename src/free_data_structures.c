@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 17:17:58 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/27 17:47:55 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/29 10:23:57 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,28 @@ void	free_split(char **array)
 void	check_south(t_node	**head, t_node **previous)
 {
 	*previous = *head;
-	while ((*head)->bottom)
+	while ((*head)->south)
 	{
-		if ((*head)->bottom->bottom)
-			*previous = (*head)->bottom;
-		*head = (*head)->bottom;
+		if ((*head)->south->south)
+			*previous = (*head)->south;
+		*head = (*head)->south;
 	}
-	if ((*head)->right)
+	if ((*head)->east)
 		*previous = *head;
 }
 
 void	check_east(t_node **head, t_node **previous)
 {
-	while ((*head)->right)
+	while ((*head)->east)
 	{
-		if ((*head)->right->right)
-			*previous = (*head)->right;
-		*head = (*head)->right;
+		if ((*head)->east->east)
+			*previous = (*head)->east;
+		*head = (*head)->east;
 	}
-	if ((*previous)->bottom == *head)
-		(*previous)->bottom = NULL;
-	else if ((*previous)->right == *head)
-		(*previous)->right = NULL;
+	if ((*previous)->south == *head)
+		(*previous)->south = NULL;
+	else if ((*previous)->east == *head)
+		(*previous)->east = NULL;
 }
 
 void	free_nodes(void)
@@ -60,7 +60,7 @@ void	free_nodes(void)
 	head = map()->head;
 	while (head)
 	{
-		if (!head->right && !head->bottom)
+		if (!head->east && !head->south)
 		{
 			free(head);
 			break ;

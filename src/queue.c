@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:19:40 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/27 15:07:07 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/29 10:23:57 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_node	*dig_and_search(int y)
 
 	head = map()->head;
 	while (y - 1 != head->y)
-		head = head->bottom;
+		head = head->south;
 	return (head);
 }
 
@@ -28,8 +28,8 @@ t_node	*dig_and_search(int y)
 // same column as the created node and returns it.
 t_node	*search_on_the_right(t_node *node_above, int x)
 {
-	while (node_above->right && node_above->x < x)
-		node_above = node_above->right;
+	while (node_above->east && node_above->x < x)
+		node_above = node_above->east;
 	if (node_above->x != x)
 		return (NULL);
 	return (node_above);
@@ -42,12 +42,12 @@ t_node	*shift_layers(int x)
 	t_node	*head;
 
 	head = map()->head;
-	while (head->bottom)
-		head = head->bottom;
+	while (head->south)
+		head = head->south;
 	if (!x)
 		return (head);
-	while (head->right)
-		head = head->right;
+	while (head->east)
+		head = head->east;
 	return (head);
 }
 
@@ -61,7 +61,7 @@ void	connect_above_node(t_node *node)
 	node_above = search_on_the_right(node_above, node->x);
 	if (!node_above)
 		return ;
-	node_above->bottom = node;
+	node_above->south = node;
 }
 
 // This function adds the node to
@@ -77,9 +77,9 @@ void	queue_add_node(t_node *node)
 	{
 		head = shift_layers(node->x);
 		if (!node->x)
-			head->bottom = node;
+			head->south = node;
 		else
-			head->right = node;
+			head->east = node;
 		if (node->y > 0)
 			connect_above_node(node);
 	}

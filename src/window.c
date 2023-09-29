@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:18:27 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/28 18:51:15 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/29 10:23:57 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	put_pixels_on_img(void)
 		while (head)
 		{
 			put_pixel(head->x, head->y, head->color);
-			head = head->right;
+			head = head->east;
 		}
-		save = save->bottom;
+		save = save->south;
 		head = save;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 17:48:43 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/28 18:33:57 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/29 10:23:57 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ t_node	*create_node(int altitude, int x, int y, int color)
 	new->x = x;
 	new->y = y;
 	new->color = color;
-	new->right = NULL;
-	new->bottom = NULL;
+	new->east = NULL;
+	new->south = NULL;
 	return (new);
 }
 

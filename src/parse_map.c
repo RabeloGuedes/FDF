@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:45:41 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/28 18:38:17 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/29 10:23:57 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	display_nodes(void)
 		while (head)
 		{
 			ft_printf("(%i, %i, %i) -> ", head->x, head->y, head->z);
-			head = head->right;
+			head = head->east;
 		}
-		save = save->bottom;
+		save = save->south;
 		head = save;
 		ft_printf("\n");
 	}
@@ -82,13 +82,13 @@ void	expand_map(void)
 	{
 		current->x *= map()->sf / 1.6;
 		current->y *= map()->sf / 1.6;
-		if (!current->right)
+		if (!current->east)
 		{
-			save = save->bottom;
+			save = save->south;
 			current = save;
 		}
 		else
-			current = current->right;
+			current = current->east;
 	}
 }
 
