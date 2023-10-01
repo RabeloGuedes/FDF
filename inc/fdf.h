@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 12:23:08 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/29 09:47:02 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/01 16:40:57 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,26 @@ typedef struct s_node
 	int				y;
 	int				z;
 	long long		color;
-	struct s_node	*right;
-	struct s_node	*bottom;
+	struct s_node	*east;
+	struct s_node	*south;
 }			t_node;
+
+typedef struct s_window_infos
+{
+	int		win_h;
+	int		win_w;
+	void	*mlx;
+	void	*mlx_win;
+	void	*img;
+	char	*addr;
+}				t_win;
 
 typedef struct s_matrix_infos
 {
 	int		lines_amount;
 	int		columns_amount;
-	int		win_h;
-	int		win_w;
+	t_win	*win;
 	int		sf;
-	void	*mlx;
-	void	*mlx_win;
-	void	*img;
-	char	*addr;
 	int		bpp;
 	int		endian;
 	t_node	*head;
@@ -71,6 +76,10 @@ void		generate_lines(int fd);
 int			convert_line_into_coordinates(char **array, int y);
 void		generate_line_phase_1(char **line, char ***array);
 void		generate_line_phase_2(int fd, char **line, char ***array, int *y);
+void		center_map(void);
+void		center_map_height(t_node *first, t_node *last);
+void		center_map_width(t_node *first, t_node *last);
+void		apply_mod(int set_origin, char direction);
 // parse maps
 
 // queue

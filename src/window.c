@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:18:27 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/29 10:23:57 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/01 17:55:49 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 void	window_init(void)
 {
-	map()->mlx = mlx_init();
-	mlx_get_screen_size(map()->mlx, &map()->win_w, &map()->win_h);
+	static t_win	window;
+
+	map()->win = &window;
+	map()->win->mlx = mlx_init();
+	mlx_get_screen_size(map()->win->mlx,
+		&map()->win->win_w, &map()->win->win_h);
 }
 
 void	put_pixel(int x, int y, int color)
 {
 	char	*dst;
 
-	dst = map()->addr + (y * map()->columns_amount
+	dst = map()->win->addr + (y * map()->columns_amount
 			+ x * (map()->bpp / 8));
 	*(unsigned int *)dst = color;
 }
@@ -51,14 +55,17 @@ void	window(void)
 	t_matrix	*map_ref;
 
 	map_ref = map();
-	map_ref->img = mlx_new_image(map_ref->mlx, map_ref->win_w, map_ref->win_h);
-	map_ref->mlx_win = mlx_new_window(map_ref->mlx, map_ref->win_w,
-			map_ref->win_h, "fdf");
-	map_ref->addr = mlx_get_data_addr(map_ref->img, &map_ref->bpp, &map_ref->columns_amount,
-			&map_ref->endian);
+	map_ref->win->img = mlx_new_image(map_ref->win->mlx,
+			map_ref->win->win_w, map_ref->win->win_h);
+	map_ref->win->mlx_win = mlx_new_window(map_ref->win->mlx,
+			map_ref->win->win_w, map_ref->win->win_h, "fdf");
+	map_ref->win->addr = mlx_get_data_addr(map_ref->win->img,
+			&map_ref->bpp, &map_ref->columns_amount, &map_ref->endian);
 	put_pixels_on_img();
-	mlx_put_image_to_window(map_ref->mlx, map_ref->mlx_win, map_ref->img, 0, 0);
-	mlx_hook(map_ref->mlx_win, ON_KEYDOWN, 1L << 0, esc_window, map_ref);
-	mlx_hook(map_ref->mlx_win, ON_DESTROY, 0, mouse_destroy_window, map_ref);
-	mlx_loop(map_ref->mlx);
+	mlx_put_image_to_window(map_ref->win->mlx,
+		map_ref->win->mlx_win, map_ref->win->img, 0, 0);
+	mlx_hook(map_ref->win->mlx_win, ON_KEYDOWN, 1L << 0, esc_window, map_ref);
+	mlx_hook(map_ref->win->mlx_win, ON_DESTROY, 0,
+		mouse_destroy_window, map_ref);
+	mlx_loop(map_ref->win->mlx);
 }

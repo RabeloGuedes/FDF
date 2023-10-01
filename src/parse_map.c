@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:45:41 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/29 10:23:57 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/09/29 12:07:23 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	get_scaling_factor(void)
 
 	map_h = map()->lines_amount;
 	map_w = map()->columns_amount;
-	sf_h = map()->win_h / map_h;
-	sf_w = map()->win_w / map_w;
+	sf_h = map()->win->win_h / map_h;
+	sf_w = map()->win->win_w / map_w;
 	if (sf_w < sf_h)
 		map()->sf = sf_w;
 	else
@@ -101,4 +101,5 @@ void	get_matrix(char *file_name)
 	generate_lines(fd);
 	handle_close(fd);
 	expand_map();
+	center_map();
 }
