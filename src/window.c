@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:18:27 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/01 17:55:49 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:30:51 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,12 @@ void	put_pixel(int x, int y, int color)
 {
 	char	*dst;
 
-	dst = map()->win->addr + (y * map()->columns_amount
-			+ x * (map()->bpp / 8));
-	*(unsigned int *)dst = color;
+	if (x >= 0 && x < map()->win->win_w && y >= 0 && y < map()->win->win_h)
+	{
+		dst = map()->win->addr + (y * map()->columns_amount
+				+ x * (map()->bpp / 8));
+		*(unsigned int *)dst = color;
+	}
 }
 
 void	put_pixels_on_img(void)
@@ -62,6 +65,8 @@ void	window(void)
 	map_ref->win->addr = mlx_get_data_addr(map_ref->win->img,
 			&map_ref->bpp, &map_ref->columns_amount, &map_ref->endian);
 	put_pixels_on_img();
+	draw_horizontal_lines();
+	draw_vertical_lines();
 	mlx_put_image_to_window(map_ref->win->mlx,
 		map_ref->win->mlx_win, map_ref->win->img, 0, 0);
 	mlx_hook(map_ref->win->mlx_win, ON_KEYDOWN, 1L << 0, esc_window, map_ref);
