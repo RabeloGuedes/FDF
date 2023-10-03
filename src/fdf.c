@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 11:57:56 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/29 09:49:20 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/03 13:23:03 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	main(int ac, char **av)
 {
+	static t_coor	coor;
+
 	if (ac == 2)
 	{
 		if (!file_name_checker(av[1]))
@@ -22,6 +24,7 @@ int	main(int ac, char **av)
 			exit(EXIT_FAILURE);
 		}
 		window_init();
+		map()->coor = &coor;
 		get_matrix(av[1]);
 		window();
 		free_nodes();

@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 12:23:08 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/01 16:40:57 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:12:33 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,20 @@ typedef struct s_window_infos
 	char	*addr;
 }				t_win;
 
+typedef struct s_coor
+{
+	double	x;
+	double	y;
+	double	delta_x;
+	double	delta_y;
+	int		max_x;
+	int		max_y;
+	int		max_z;
+	int		min_x;
+	int		min_y;
+	int		min_z;
+}				t_coor;
+
 typedef struct s_matrix_infos
 {
 	int		lines_amount;
@@ -59,8 +73,9 @@ typedef struct s_matrix_infos
 	int		bpp;
 	int		endian;
 	t_node	*head;
-	t_list	*file_begin;
+	t_coor	*coor;
 }				t_matrix;
+
 
 // window
 void		window(void);
@@ -71,15 +86,16 @@ void		window_init(void);
 
 // parse maps
 void		get_matrix(char *file_name);
-void		save_matrix(int fd);
 void		generate_lines(int fd);
 int			convert_line_into_coordinates(char **array, int y);
 void		generate_line_phase_1(char **line, char ***array);
 void		generate_line_phase_2(int fd, char **line, char ***array, int *y);
 void		center_map(void);
-void		center_map_height(t_node *first, t_node *last);
-void		center_map_width(t_node *first, t_node *last);
+void		center_map_height(double max_y, double min_y);
+void		center_map_width(double max_x, double min_x);
 void		apply_mod(int set_origin, char direction);
+void		set_new_max_xyz(void);
+void		set_new_min_xyz(void);
 // parse maps
 
 // queue
@@ -91,6 +107,17 @@ t_node		*shift_layers(int x);
 t_node		*search_on_the_right(t_node *node_above, int x);
 t_node		*dig_and_search(int y);
 // queue
+
+// draw
+void		put_pixel(int x, int y, int color);
+void		draw_line(t_node *first, t_node *second);
+void		draw_horizontal_lines(void);
+void		draw_vertical_lines(void);
+// draw
+
+// isometrics
+void		apply_rotation(void);
+// isometrics
 
 // files management
 int			handle_open(char *file_name);
