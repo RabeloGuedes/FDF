@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:45:41 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/29 12:07:23 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:50:03 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,6 @@ int	convert_line_into_coordinates(char **array, int y)
 	return (1);
 }
 
-void	display_nodes(void)
-{
-	t_node	*head;
-	t_node	*save;
-
-	head = map()->head;
-	save = head;
-	while (head)
-	{
-		while (head)
-		{
-			ft_printf("(%i, %i, %i) -> ", head->x, head->y, head->z);
-			head = head->east;
-		}
-		save = save->south;
-		head = save;
-		ft_printf("\n");
-	}
-}
-
 // This function calculates the scale factor
 // based on the window's and file's measurements
 void	get_scaling_factor(void)
@@ -68,6 +48,15 @@ void	get_scaling_factor(void)
 		map()->sf = sf_h;
 }
 
+int	range(int max_z, int min_z)
+{
+	if (max_z - min_z == 0)
+		return (1);
+	// if (max_z - min_z >= 5)
+	// 	return (2);
+	return (max_z - min_z);
+}
+
 // This function calls the scale factor function
 // to recalculate the new pixel distribuition
 void	expand_map(void)
@@ -80,8 +69,9 @@ void	expand_map(void)
 	save = current;
 	while (current)
 	{
-		current->x *= map()->sf / 1.6;
-		current->y *= map()->sf / 1.6;
+		current->x *= map()->sf / 2;
+		current->y *= map()->sf / 2;
+		current->z = current->y / range(map()->coor->max_z, map()->coor->min_z);
 		if (!current->east)
 		{
 			save = save->south;
@@ -101,5 +91,6 @@ void	get_matrix(char *file_name)
 	generate_lines(fd);
 	handle_close(fd);
 	expand_map();
+	apply_rotation();
 	center_map();
 }

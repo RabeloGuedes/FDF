@@ -16,7 +16,7 @@ SRC_DIR = src
 SRC_FILES = parse_map.c handle_file_manipulation.c window.c map.c\
 			handle_error.c destroy_window.c free_data_structures.c\
 			queue.c generate_lines.c node.c file_name_checker.c\
-			map_config.c
+			map_config.c draw_lines.c rotate_grid.c
 
 OBJ_DIR = obj
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC_FILES:%.c=%.o))

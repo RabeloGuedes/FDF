@@ -6,11 +6,73 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 10:22:47 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/29 15:20:05 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:20:29 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	set_new_max_xyz(void)
+{
+	t_node	*head;
+	t_node	*save;
+
+	head = map()->head;
+	save = head;
+	if (head)
+	{
+		map()->coor->max_x = head->x;
+		map()->coor->max_y = head->y;
+		map()->coor->max_z = head->z;
+		head = head->east;
+	}
+	while (head)
+	{
+		while (head)
+		{
+			if (head->x > map()->coor->max_x)
+				map()->coor->max_x = head->x;
+			if (head->y > map()->coor->max_y)
+				map()->coor->max_y = head->y;
+			if (head->z > map()->coor->max_z)
+				map()->coor->max_z = head->z;
+			head = head->east;
+		}
+		save = save->south;
+		head = save;
+	}
+}
+
+void	set_new_min_xyz(void)
+{
+	t_node	*head;
+	t_node	*save;
+
+	head = map()->head;
+	save = head;
+	if (head)
+	{
+		map()->coor->min_x = head->x;
+		map()->coor->min_y = head->y;
+		map()->coor->min_z = head->z;
+		head = head->east;
+	}
+	while (head)
+	{
+		while (head)
+		{
+			if (head->x < map()->coor->min_x)
+				map()->coor->min_x = head->x;
+			if (head->y < map()->coor->min_y)
+				map()->coor->min_y = head->y;
+			if (head->z < map()->coor->min_z)
+				map()->coor->min_z = head->z;
+			head = head->east;
+		}
+		save = save->south;
+		head = save;
+	}
+}
 
 void	apply_mod(int set_origin, char direction)
 {
@@ -34,34 +96,26 @@ void	apply_mod(int set_origin, char direction)
 	}
 }
 
-void	center_map_width(t_node *first, t_node *last)
+void	center_map_width(double max_x, double min_x)
 {
 	int	set_origin;
 
-	set_origin = (map()->win->win_w - last->x - first->x) / 2;
+	set_origin = (map()->win->win_w - max_x - min_x) / 2;
 	apply_mod(set_origin, 'x');
 }
 
-void	center_map_height(t_node *first, t_node *last)
+void	center_map_height(double max_y, double min_y)
 {
 	int	set_origin;
 
-	set_origin = (map()->win->win_h - last->y - first->y) / 2;
+	set_origin = (map()->win->win_h - max_y - min_y) / 2;
 	apply_mod(set_origin, 'y');
 }
 
 void	center_map(void)
 {
-	t_node	*last;
-	t_node	*first;
-
-	last = map()->head;
-	first = last;
-	while (last->east)
-		last = last->east;
-	center_map_width(first, last);
-	last = first;
-	while (last->south)
-		last = last->south;
-	center_map_height(first, last);
+	set_new_max_xyz();
+	set_new_min_xyz();
+	center_map_width(map()->coor->max_x, map()->coor->min_x);
+	center_map_height(map()->coor->max_y, map()->coor->min_y);
 }
