@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 18:16:45 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/27 19:32:51 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/05 11:46:51 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ void	generate_lines(int fd)
 		generate_line_phase_1(&line, &array);
 		generate_line_phase_2(fd, &line, &array, &y);
 	}
-	map()->lines_amount = y;
+	map()->coor->max_y = y;
 	free_split(array);
 }
