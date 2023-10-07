@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:45:41 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/03 16:50:03 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/05 12:36:17 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	convert_line_into_coordinates(char **array, int y)
 	while (array[i])
 		if (!build_node(array[i++], x++, y))
 			return (0);
-	map()->columns_amount = x;
+	map()->coor->max_x = x;
 	return (1);
 }
 
@@ -33,28 +33,17 @@ int	convert_line_into_coordinates(char **array, int y)
 // based on the window's and file's measurements
 void	get_scaling_factor(void)
 {
-	int	map_h;
-	int	map_w;
-	int	sf_h;
-	int	sf_w;
-
-	map_h = map()->lines_amount;
-	map_w = map()->columns_amount;
-	sf_h = map()->win->win_h / map_h;
-	sf_w = map()->win->win_w / map_w;
-	if (sf_w < sf_h)
-		map()->sf = sf_w;
-	else
-		map()->sf = sf_h;
+	map()->sf_x = map()->win->win_w / map()->coor->max_x;
+	map()->sf_y = map()->win->win_h / map()->coor->max_y;
 }
 
 int	range(int max_z, int min_z)
 {
 	if (max_z - min_z == 0)
 		return (1);
-	// if (max_z - min_z >= 5)
-	// 	return (2);
-	return (max_z - min_z);
+	if (max_z - min_z > 5 && max_z - min_z <= 50)
+		return (5);
+	return (25);
 }
 
 // This function calls the scale factor function
@@ -69,9 +58,9 @@ void	expand_map(void)
 	save = current;
 	while (current)
 	{
-		current->x *= map()->sf / 2;
-		current->y *= map()->sf / 2;
-		current->z = current->y / range(map()->coor->max_z, map()->coor->min_z);
+		current->x *= map()->sf_x / 2;
+		current->y *= map()->sf_y / 2;
+		current->z *= 50 / range(map()->coor->max_z, map()->coor->min_z);
 		if (!current->east)
 		{
 			save = save->south;
@@ -90,7 +79,9 @@ void	get_matrix(char *file_name)
 	fd = handle_open(file_name);
 	generate_lines(fd);
 	handle_close(fd);
+	set_z_max_min();
 	expand_map();
-	apply_rotation();
+	apply_rotation(map()->coor->angle_x,
+		map()->coor->angle_y, map()->coor->angle_z);
 	center_map();
 }
