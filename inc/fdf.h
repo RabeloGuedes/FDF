@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 12:23:08 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/07 18:14:19 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/08 19:28:56 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,10 @@
 #  define KEY_ZOOM_OUT 45
 # endif
 
+# ifndef KEY_RESET
+#  define KEY_RESET 48
+# endif
+
 enum
 {
 	ON_KEYDOWN = 2,
@@ -88,6 +92,9 @@ typedef struct s_node
 	double				x;
 	double				y;
 	double				z;
+	double				origin_x;
+	double				origin_y;
+	double				origin_z;
 	long long		color;
 	struct s_node	*east;
 	struct s_node	*south;
@@ -153,6 +160,7 @@ void		apply_mod(int set_origin, char direction);
 void		set_new_max_xy(void);
 void		set_new_min_xy(void);
 void		set_z_max_min(void);
+void		expand_map(void);
 // parse maps
 
 // queue
@@ -183,6 +191,7 @@ void		rebuild_image(void);
 double		rad_clamp(double val);
 void		translation_controls(int key_code, bool *changed);
 void		rotation_controls(int key_code, bool *changed);
+void		reset_projection(bool *changed);
 // controls
 
 // files management
@@ -198,7 +207,5 @@ void		free_split(char **array);
 void		check_south(t_node	**head, t_node **previous);
 void		check_east(t_node **head, t_node **previous);
 void		free_nodes(void);
-double		convert_angle_to_radians(double	angle);
-void		put_max_values(void);
 // utils
 #endif

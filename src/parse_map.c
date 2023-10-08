@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:45:41 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/05 12:36:17 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/08 19:31:19 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ void	expand_map(void)
 		current->x *= map()->sf_x / 2;
 		current->y *= map()->sf_y / 2;
 		current->z *= 50 / range(map()->coor->max_z, map()->coor->min_z);
+		current->origin_x = current->x;
+		current->origin_y = current->y;
+		current->origin_z = current->z;
 		if (!current->east)
 		{
 			save = save->south;

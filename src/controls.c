@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 08:57:44 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/07 18:16:16 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/08 19:34:06 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,29 @@ void	rotation_controls(int key_code, bool *changed)
 	*changed = true;
 }
 
+void	reset_projection(bool *changed)
+{
+	t_node	*head;
+	t_node	*prev;
+
+	head = map()->head;
+	while (head)
+	{
+		prev = head;
+		while (head)
+		{
+			head->x = head->origin_x;
+			head->y = head->origin_y;
+			head->z = head->origin_z;
+			head = head->east;
+		}
+		prev = prev->south;
+		head = prev;
+	}
+	center_map();
+	*changed = true;
+}
+
 int	central_control(int key_code)
 {
 	bool		changed;
@@ -91,6 +114,8 @@ int	central_control(int key_code)
 	if (key_code == KEY_UP || key_code == KEY_DOWN ||
 		key_code == KEY_RIGHT || key_code == KEY_LEFT)
 		translation_controls(key_code, &changed);
+	if (key_code == KEY_RESET)
+		reset_projection(&changed);
 	if (changed)
 		rebuild_image();
 	return (0);
