@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 12:23:08 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/08 19:28:56 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/10 14:40:59 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,8 +132,7 @@ typedef struct s_matrix_infos
 	int		lines_amount;
 	int		columns_amount;
 	t_win	*win;
-	int		sf_x;
-	int		sf_y;
+	double	sf;
 	int		bpp;
 	int		endian;
 	t_node	*head;
@@ -153,14 +152,9 @@ void		generate_lines(int fd);
 int			convert_line_into_coordinates(char **array, int y);
 void		generate_line_phase_1(char **line, char ***array);
 void		generate_line_phase_2(int fd, char **line, char ***array, int *y);
-void		center_map(void);
-void		center_map_height(double max_y, double min_y);
-void		center_map_width(double max_x, double min_x);
 void		apply_mod(int set_origin, char direction);
-void		set_new_max_xy(void);
-void		set_new_min_xy(void);
-void		set_z_max_min(void);
 void		expand_map(void);
+void		rebuild_projection(void);
 // parse maps
 
 // queue
@@ -198,6 +192,18 @@ void		reset_projection(bool *changed);
 int			handle_open(char *file_name);
 void		handle_close(int fd);
 // files management
+
+// center_projection.c
+void		center_map_width(double max_x, double min_x);
+void		center_map_height(double max_y, double min_y);
+void		center_map(void);
+// center_projection.c
+
+// set_ranges.c
+void		set_z_max_min(void);
+void		set_new_max_xy(void);
+void		set_new_min_xy(void);
+// set_ranges.c
 
 // utils
 t_matrix	*map(void);

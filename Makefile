@@ -13,13 +13,16 @@ INC_FLAGS = -I ./inc -I $(LIBFT_DIR)/inc -I $(MINILIBX_DIR)/
 PROGRAM_LIBS = -L$(LIBFT_DIR) -lft -L$(MINILIBX_DIR) -lmlx_Linux -L/usr/lib -lXext -lX11 -lz -lm 
 
 SRC_DIR = src
-SRC_FILES = parse_map.c handle_file_manipulation.c window.c map.c\
-			handle_error.c destroy_window.c free_data_structures.c\
-			queue.c generate_lines.c node.c file_name_checker.c\
-			map_config.c draw_lines.c rotate_grid.c controls.c
+SRC_FILES =	parse_map.c  window.c map.c\
+			destroy_window.c\
+			queue.c generate_lines.c node.c\
+			map_config.c draw_lines.c rotate_grid.c controls.c\
+			set_ranges.c center_projection.c handle_error.c handle_file_manipulation.c\
+			file_name_checker.c free_data_structures.c rebuild_projection.c
 
 OBJ_DIR = obj
-OBJ = $(addprefix $(OBJ_DIR)/,$(SRC_FILES:%.c=%.o))
+OBJ =	$(addprefix $(OBJ_DIR)/,$(SRC_FILES:%.c=%.o))
+
 
 all: $(NAME)
 
@@ -28,7 +31,7 @@ $(NAME): $(OBJ)
 	@make -s -C $(MINILIBX_DIR) 2> /dev/null 1> /dev/null
 	@$(CC) $(CFLAGS) $(INC_FLAGS) $(OBJ) $(SRC_DIR)/$(NAME).c -o $(NAME) $(PROGRAM_LIBS)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c 
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) -c $(CFLAGS) $(INC_FLAGS) $< -o $@
 
