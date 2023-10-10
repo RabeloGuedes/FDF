@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 08:57:44 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/08 19:34:06 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/10 14:41:11 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	rotation_controls(int key_code, bool *changed)
 		nangle_y += 0.1;
 	apply_rotation(rad_clamp(nangle_x),
 		rad_clamp(nangle_y), rad_clamp(nangle_z));
+	// printf("nangle_x: %f | nangle_y: %f | nangle_z: %f\n", nangle_x, nangle_y, nangle_z);
+	// printf("clamp => nangle_x: %f | clamp => nangle_y: %f | clamp => nangle_z: %f\n", rad_clamp(nangle_x), rad_clamp(nangle_y), rad_clamp(nangle_z));
 	center_map();
 	*changed = true;
 }
@@ -92,6 +94,7 @@ void	reset_projection(bool *changed)
 		prev = prev->south;
 		head = prev;
 	}
+	rebuild_projection();
 	center_map();
 	*changed = true;
 }

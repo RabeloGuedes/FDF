@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:45:41 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/08 19:31:19 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/10 14:36:53 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,17 @@ int	convert_line_into_coordinates(char **array, int y)
 // based on the window's and file's measurements
 void	get_scaling_factor(void)
 {
-	map()->sf_x = map()->win->win_w / map()->coor->max_x;
-	map()->sf_y = map()->win->win_h / map()->coor->max_y;
-}
+	double	x_range;
+	double	y_range;
+	double	z_range;
+	double	max_range;
 
-int	range(int max_z, int min_z)
-{
-	if (max_z - min_z == 0)
-		return (1);
-	if (max_z - min_z > 5 && max_z - min_z <= 50)
-		return (5);
-	return (25);
+	x_range = map()->coor->max_x - map()->coor->min_x;
+	y_range = map()->coor->max_y - map()->coor->min_y;
+	z_range = map()->coor->max_z - map()->coor->min_z;
+	max_range = fmax(fmax(x_range,  y_range), z_range);
+	map()->sf = fmin(map()->win->win_w / max_range,
+		map()->win->win_h / max_range);
 }
 
 // This function calls the scale factor function
@@ -58,12 +58,9 @@ void	expand_map(void)
 	save = current;
 	while (current)
 	{
-		current->x *= map()->sf_x / 2;
-		current->y *= map()->sf_y / 2;
-		current->z *= 50 / range(map()->coor->max_z, map()->coor->min_z);
-		current->origin_x = current->x;
-		current->origin_y = current->y;
-		current->origin_z = current->z;
+		current->x *= map()->sf;
+		current->y *= map()->sf;
+		current->z *= map()->sf;
 		if (!current->east)
 		{
 			save = save->south;
@@ -82,6 +79,8 @@ void	get_matrix(char *file_name)
 	fd = handle_open(file_name);
 	generate_lines(fd);
 	handle_close(fd);
+	set_new_max_xy();
+	set_new_min_xy();
 	set_z_max_min();
 	expand_map();
 	apply_rotation(map()->coor->angle_x,
