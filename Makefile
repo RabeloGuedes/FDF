@@ -18,23 +18,26 @@ ERRORS_FILES = $(ERRORS_DIR)handle_error.c $(ERRORS_DIR)handle_file_manipulation
 UTILS_DIR = utils/
 UTILS_FILES = $(UTILS_DIR)file_name_checker.c $(UTILS_DIR)free_data_structures.c
 
+PROJECTION_DIR = projection/
+PROJECTION_FILES = 	$(PROJECTION_DIR)center_projection.c $(PROJECTION_DIR)controls.c $(PROJECTION_DIR)rebuild_projection.c\
+					$(PROJECTION_DIR)rotate_grid.c $(PROJECTION_DIR)set_ranges.c
+
 QUEUE_DIR = queue/
-QUEUE_FILES = $(QUEUE_DIR)node.c $(QUEUE_DIR)/queue.c
+QUEUE_FILES = $(QUEUE_DIR)node.c $(QUEUE_DIR)queue.c
 
 LINES_DIR = lines/
-LINES_FILES = $(LINES_DIR)/draw_lines.c $(LINES_DIR)/generate_lines.c
+LINES_FILES = $(LINES_DIR)draw_lines.c $(LINES_DIR)generate_lines.c
 
 WINDOW_DIR = window/
-WINDOW_FILES = $(WINDOW_DIR)window.c $(WINDOW_DIR)/destroy_window.c
+WINDOW_FILES = $(WINDOW_DIR)window.c $(WINDOW_DIR)destroy_window.c
 
 HANDLE_MAP = handle_map/
-HANDLE_MAP_FILES = $(HANDLE_MAP)/parse_map.c $(HANDLE_MAP)/map_config.c $(HANDLE_MAP)/map.c
+HANDLE_MAP_FILES = $(HANDLE_MAP)parse_map.c $(HANDLE_MAP)map_config.c $(HANDLE_MAP)map.c
 
 SRC_DIR = src
-SRC_FILES =	rotate_grid.c controls.c\
-			set_ranges.c center_projection.c rebuild_projection.c\
-			$(ERRORS_FILES) $(UTILS_FILES) $(QUEUE_FILES)\
-			$(LINES_FILES) $(HANDLE_MAP_FILES)
+SRC_FILES =	$(PROJECTION_FILES)	$(ERRORS_FILES) $(UTILS_FILES)\
+			$(QUEUE_FILES) $(LINES_FILES) $(HANDLE_MAP_FILES)\
+			$(WINDOW_FILES)
 
 OBJ_DIR = obj
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC_FILES:%.c=%.o))
