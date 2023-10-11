@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 12:23:08 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/10 14:40:59 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/11 15:43:57 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,12 @@ enum
 
 typedef struct s_node
 {
-	double				x;
-	double				y;
-	double				z;
-	double				origin_x;
-	double				origin_y;
-	double				origin_z;
+	double			x;
+	double			y;
+	double			z;
+	double			origin_x;
+	double			origin_y;
+	double			origin_z;
 	long long		color;
 	struct s_node	*east;
 	struct s_node	*south;
@@ -139,79 +139,74 @@ typedef struct s_matrix_infos
 	t_coor	*coor;
 }				t_matrix;
 
+// errors
+void		malloc_error(void);
+int			handle_open(char *file_name);
+void		handle_close(int fd);
+// errors
 
-// window
-void		window(void);
-int			mouse_destroy_window(void);
-void		window_init(void);
-// window
-
-// parse maps
-void		get_matrix(char *file_name);
-void		generate_lines(int fd);
+// handle_map
+void		apply_mod(int set_origin, char direction);
+t_matrix	*map(void);
 int			convert_line_into_coordinates(char **array, int y);
+void		get_scaling_factor(void);
+void		expand_map(void);
+void		get_matrix(char *file_name);
+// handle_map
+
+// lines
+void		generate_lines(int fd);
 void		generate_line_phase_1(char **line, char ***array);
 void		generate_line_phase_2(int fd, char **line, char ***array, int *y);
-void		apply_mod(int set_origin, char direction);
-void		expand_map(void);
+void		draw_line(t_node *first, t_node *second);
+void		draw_horizontal_lines(void);
+void		draw_vertical_lines(void);
+// lines
+
+// projection
+void		center_map_width(double max_x, double min_x);
+void		center_map_height(double max_y, double min_y);
+void		center_map(void);
+int			central_control(int key_code);
+void		translation_controls(int key_code, bool *changed);
+void		rotation_controls(int key_code, bool *changed);
 void		rebuild_projection(void);
-// parse maps
+void		reset_projection(bool *changed);
+void		rebuild_image(void);
+void		rotate_x(t_node *node, double angle_x);
+void		rotate_y(t_node *node, double angle_y);
+void		rotate_z(t_node *node, double angle_z);
+void		apply_rotation(double angle_x, double angle_y, double angle_z);
+void		set_z_max_min(void);
+void		set_new_max_xy(void);
+void		set_new_min_xy(void);
+double		rad_clamp(double val);
+// projection
 
 // queue
 t_node		*create_node(int altitude, int x, int y, int color);
 int			build_node(char *str, int x, int y);
-void		queue_add_node(t_node *node);
-void		connect_above_node(t_node *node);
-t_node		*shift_layers(int x);
-t_node		*search_on_the_right(t_node *node_above, int x);
 t_node		*dig_and_search(int y);
+t_node		*search_on_the_right(t_node *node_above, int x);
+t_node		*shift_layers(int x);
+void		connect_above_node(t_node *node);
+void		queue_add_node(t_node *node);
 // queue
 
-// draw
-void		put_pixel(int x, int y, int color);
-void		put_pixels_on_img(void);
-void		draw_line(t_node *first, t_node *second);
-void		draw_horizontal_lines(void);
-void		draw_vertical_lines(void);
-// draw
-
-// isometrics
-void		apply_rotation(double angle_x, double angle_y, double angle_z);
-// isometrics
-
-// controls
-int			central_control(int key_code);
-void		rebuild_image(void);
-double		rad_clamp(double val);
-void		translation_controls(int key_code, bool *changed);
-void		rotation_controls(int key_code, bool *changed);
-void		reset_projection(bool *changed);
-// controls
-
-// files management
-int			handle_open(char *file_name);
-void		handle_close(int fd);
-// files management
-
-// center_projection.c
-void		center_map_width(double max_x, double min_x);
-void		center_map_height(double max_y, double min_y);
-void		center_map(void);
-// center_projection.c
-
-// set_ranges.c
-void		set_z_max_min(void);
-void		set_new_max_xy(void);
-void		set_new_min_xy(void);
-// set_ranges.c
-
 // utils
-t_matrix	*map(void);
 int			file_name_checker(char *file_name);
-void		malloc_error(void);
 void		free_split(char **array);
 void		check_south(t_node	**head, t_node **previous);
 void		check_east(t_node **head, t_node **previous);
 void		free_nodes(void);
 // utils
+
+// window
+void		window_init(void);
+void		window(void);
+void		put_pixel(int x, int y, int color);
+void		put_pixels_on_img(void);
+int			mouse_destroy_window(void);
+// window
+
 #endif

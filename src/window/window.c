@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:18:27 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/07 18:12:05 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/11 15:05:31 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ void	window_init(void)
 
 	map()->win = &window;
 	map()->win->mlx = mlx_init();
-	// mlx_get_screen_size(map()->win->mlx,
-	// 	&map()->win->win_w, &map()->win->win_h);
-	map()->win->win_h = 1440;
-	map()->win->win_w = 2096;
+	mlx_get_screen_size(map()->win->mlx,
+		&map()->win->win_w, &map()->win->win_h);
 }
 
 void	put_pixel(int x, int y, int color)
@@ -71,8 +69,8 @@ void	window(void)
 	draw_vertical_lines();
 	mlx_put_image_to_window(map_ref->win->mlx,
 		map_ref->win->mlx_win, map_ref->win->img, 0, 0);
-	mlx_hook(map_ref->win->mlx_win, ON_KEYDOWN, 1L << 0, central_control, map_ref);
-	// mlx_key_hook(map_ref->win->mlx_win, central_control, map_ref);
+	mlx_hook(map_ref->win->mlx_win, ON_KEYDOWN,
+		1L << 0, central_control, map_ref);
 	mlx_hook(map_ref->win->mlx_win, ON_DESTROY, 0,
 		mouse_destroy_window, map_ref);
 	mlx_loop(map_ref->win->mlx);

@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:45:41 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/10 14:36:53 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/11 15:18:34 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,8 @@ void	get_scaling_factor(void)
 	x_range = map()->coor->max_x - map()->coor->min_x;
 	y_range = map()->coor->max_y - map()->coor->min_y;
 	z_range = map()->coor->max_z - map()->coor->min_z;
-	max_range = fmax(fmax(x_range,  y_range), z_range);
-	map()->sf = fmin(map()->win->win_w / max_range,
-		map()->win->win_h / max_range);
+	max_range = fmax(fmax(x_range, y_range), z_range);
+	map()->sf = fmin(map()->win->win_w / max_range, map()->win->win_h / max_range);
 }
 
 // This function calls the scale factor function

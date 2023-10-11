@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 09:43:50 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/29 09:46:31 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/11 15:06:42 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	file_name_checker(char *file_name)
 
 	len = ft_strlen(file_name) - 1;
 	if (file_name[len] == 'f' && file_name[len - 1] == 'd'
-			&& file_name[len - 2] == 'f' && file_name[len - 3] == '.')
-			return (1);
+		&& file_name[len - 2] == 'f' && file_name[len - 3] == '.')
+		return (1);
 	return (0);
 }

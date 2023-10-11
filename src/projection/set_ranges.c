@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:44:06 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/10 13:44:36 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/11 15:27:37 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,13 @@ void	set_new_min_xy(void)
 		save = save->south;
 		head = save;
 	}
+}
+
+double	rad_clamp(double val)
+{
+	if (val < 0)
+		return (2 * M_PI + val);
+	else if (val > 2 * M_PI)
+		return (2 * M_PI - val);
+	return (val);
 }

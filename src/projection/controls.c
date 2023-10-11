@@ -6,32 +6,11 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 08:57:44 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/10 14:41:11 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/11 15:27:23 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	rebuild_image(void)
-{
-	ft_bzero(map()->win->addr,
-		(map()->win->win_h *
-		map()->win->win_w * sizeof(map()->bpp)));
-	put_pixels_on_img();
-	draw_horizontal_lines();
-	draw_vertical_lines();
-	mlx_put_image_to_window(map()->win->mlx,
-		map()->win->mlx_win, map()->win->img, 0, 0);
-}
-
-double	rad_clamp(double val)
-{
-	if (val < 0)
-		return (2 * M_PI + val);
-	else if (val > 2 * M_PI)
-		return (2 * M_PI - val);
-	return (val);
-}
 
 void	translation_controls(int key_code, bool *changed)
 {
@@ -69,32 +48,6 @@ void	rotation_controls(int key_code, bool *changed)
 		nangle_y += 0.1;
 	apply_rotation(rad_clamp(nangle_x),
 		rad_clamp(nangle_y), rad_clamp(nangle_z));
-	// printf("nangle_x: %f | nangle_y: %f | nangle_z: %f\n", nangle_x, nangle_y, nangle_z);
-	// printf("clamp => nangle_x: %f | clamp => nangle_y: %f | clamp => nangle_z: %f\n", rad_clamp(nangle_x), rad_clamp(nangle_y), rad_clamp(nangle_z));
-	center_map();
-	*changed = true;
-}
-
-void	reset_projection(bool *changed)
-{
-	t_node	*head;
-	t_node	*prev;
-
-	head = map()->head;
-	while (head)
-	{
-		prev = head;
-		while (head)
-		{
-			head->x = head->origin_x;
-			head->y = head->origin_y;
-			head->z = head->origin_z;
-			head = head->east;
-		}
-		prev = prev->south;
-		head = prev;
-	}
-	rebuild_projection();
 	center_map();
 	*changed = true;
 }
@@ -110,12 +63,12 @@ int	central_control(int key_code)
 		exit(EXIT_SUCCESS);
 	}
 	changed = false;
-	if (key_code == KEY_D || key_code == KEY_A ||
-		key_code == KEY_W || key_code == KEY_S
+	if (key_code == KEY_D || key_code == KEY_A
+		|| key_code == KEY_W || key_code == KEY_S
 		|| key_code == KEY_E || key_code == KEY_Q)
 		rotation_controls(key_code, &changed);
-	if (key_code == KEY_UP || key_code == KEY_DOWN ||
-		key_code == KEY_RIGHT || key_code == KEY_LEFT)
+	if (key_code == KEY_UP || key_code == KEY_DOWN
+		|| key_code == KEY_RIGHT || key_code == KEY_LEFT)
 		translation_controls(key_code, &changed);
 	if (key_code == KEY_RESET)
 		reset_projection(&changed);
