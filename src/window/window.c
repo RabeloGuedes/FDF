@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:18:27 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/11 15:05:31 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/11 17:58:16 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	window(void)
 	put_pixels_on_img();
 	draw_horizontal_lines();
 	draw_vertical_lines();
+	// mlx_do_key_autorepeatoff(map()->win->mlx);
 	mlx_put_image_to_window(map_ref->win->mlx,
 		map_ref->win->mlx_win, map_ref->win->img, 0, 0);
 	mlx_hook(map_ref->win->mlx_win, ON_KEYDOWN,
@@ -74,4 +75,5 @@ void	window(void)
 	mlx_hook(map_ref->win->mlx_win, ON_DESTROY, 0,
 		mouse_destroy_window, map_ref);
 	mlx_loop(map_ref->win->mlx);
+	mlx_loop_end(map()->win->mlx);
 }

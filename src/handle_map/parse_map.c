@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:45:41 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/11 15:18:34 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/11 20:05:57 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,12 @@ int	convert_line_into_coordinates(char **array, int y)
 // based on the window's and file's measurements
 void	get_scaling_factor(void)
 {
-	double	x_range;
-	double	y_range;
-	double	z_range;
 	double	max_range;
 
-	x_range = map()->coor->max_x - map()->coor->min_x;
-	y_range = map()->coor->max_y - map()->coor->min_y;
-	z_range = map()->coor->max_z - map()->coor->min_z;
-	max_range = fmax(fmax(x_range, y_range), z_range);
+	map()->coor->range_x = map()->coor->max_x - map()->coor->min_x;
+	map()->coor->range_y = map()->coor->max_y - map()->coor->min_y;
+	map()->coor->range_z = map()->coor->max_z - map()->coor->min_z;
+	max_range = fmax(fmax(map()->coor->range_x, map()->coor->range_y),map()->coor->range_z);
 	map()->sf = fmin(map()->win->win_w / max_range, map()->win->win_h / max_range);
 }
 
@@ -52,7 +49,6 @@ void	expand_map(void)
 	t_node	*current;
 	t_node	*save;
 
-	get_scaling_factor();
 	current = map()->head;
 	save = current;
 	while (current)
@@ -81,6 +77,7 @@ void	get_matrix(char *file_name)
 	set_new_max_xy();
 	set_new_min_xy();
 	set_z_max_min();
+	get_scaling_factor();
 	expand_map();
 	apply_rotation(map()->coor->angle_x,
 		map()->coor->angle_y, map()->coor->angle_z);

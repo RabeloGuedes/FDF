@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 11:57:56 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/11 14:11:41 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/11 20:13:21 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int ac, char **av)
 		}
 		window_init();
 		map()->coor = &coor;
+		map()->coor->center_switch = 1;
 		map()->coor->angle_x = 0;
 		map()->coor->angle_y = 0;
 		map()->coor->angle_z = 0;

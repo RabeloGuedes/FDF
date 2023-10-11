@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 12:23:08 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/11 15:43:57 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/11 20:29:39 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,10 @@ typedef struct s_coor
 	double	angle_x;
 	double	angle_y;
 	double	angle_z;
+	double	range_x;
+	double	range_y;
+	double	range_z;
+	int		center_switch;
 }				t_coor;
 
 typedef struct s_matrix_infos
@@ -181,6 +185,7 @@ void		set_z_max_min(void);
 void		set_new_max_xy(void);
 void		set_new_min_xy(void);
 double		rad_clamp(double val);
+void		rescale_projection(double sf);
 // projection
 
 // queue

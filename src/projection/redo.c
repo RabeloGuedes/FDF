@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:25:10 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/11 15:26:09 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/11 20:16:33 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	reset_projection(bool *changed)
 		prev = prev->south;
 		head = prev;
 	}
+	map()->coor->center_switch = 1;
 	rebuild_projection();
 	center_map();
 	*changed = true;
