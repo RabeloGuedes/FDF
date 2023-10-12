@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:54:29 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/20 19:17:19 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:54:34 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*update_buffer(char *buffer, int fd);
 char	*get_one_line(char *buffer);
 char	*update_new_buffer(char *buffer);
 size_t	ft_strlen_gnl(char *s);
-char	*ft_strchr(char *s, int c);
+char	*ft_strchr_gnl(char *s, int c);
 char	*ft_strjoin(char *s1, char *s2);
 
 #endif

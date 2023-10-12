@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:54:31 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/20 19:17:03 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:54:14 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_strlen_gnl(char *s)
 	return (i);
 }
 
-char	*ft_strchr(char *s, int c)
+char	*ft_strchr_gnl(char *s, int c)
 {
 	if (!s)
 		return (NULL);

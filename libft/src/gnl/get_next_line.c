@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:54:34 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/20 19:17:41 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:54:55 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*update_buffer(char *buffer, int fd)
 	temp = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (!temp)
 		return (NULL);
-	while (!ft_strchr(buffer, '\n') && r_status)
+	while (!ft_strchr_gnl(buffer, '\n') && r_status)
 	{
 		r_status = read(fd, temp, BUFFER_SIZE);
 		if (r_status == -1)

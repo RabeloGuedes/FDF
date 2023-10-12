@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 12:23:08 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/11 20:29:39 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/12 15:28:26 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,8 @@ void		rescale_projection(double sf);
 // projection
 
 // queue
+int			color_checker(char *color);
+int			color_build(char *color);
 t_node		*create_node(int altitude, int x, int y, int color);
 int			build_node(char *str, int x, int y);
 t_node		*dig_and_search(int y);
