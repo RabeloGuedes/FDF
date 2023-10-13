@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 12:23:08 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/12 15:28:26 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:21:38 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ enum
 
 typedef struct s_node
 {
+	int				id;
 	double			x;
 	double			y;
 	double			z;
@@ -131,16 +132,34 @@ typedef struct s_coor
 	int		center_switch;
 }				t_coor;
 
+typedef struct s_keybinds
+{
+	bool left;
+	bool right;
+	bool down;
+	bool up;
+	bool w;
+	bool a;
+	bool d;
+	bool s;
+	bool e;
+	bool q;
+	bool zoom_in;
+	bool zoom_out;
+	bool reset;
+}	t_keybinds;
+
 typedef struct s_matrix_infos
 {
-	int		lines_amount;
-	int		columns_amount;
-	t_win	*win;
-	double	sf;
-	int		bpp;
-	int		endian;
-	t_node	*head;
-	t_coor	*coor;
+	int			lines_amount;
+	int			columns_amount;
+	t_win		*win;
+	double		sf;
+	int			bpp;
+	int			endian;
+	t_node		*head;
+	t_coor		*coor;
+	t_keybinds	keys;
 }				t_matrix;
 
 // errors
@@ -171,9 +190,11 @@ void		draw_vertical_lines(void);
 void		center_map_width(double max_x, double min_x);
 void		center_map_height(double max_y, double min_y);
 void		center_map(void);
-int			central_control(int key_code);
-void		translation_controls(int key_code, bool *changed);
-void		rotation_controls(int key_code, bool *changed);
+int			on_key_pressed(int key_code);
+int			on_key_released(int key_code);
+int			central_control();
+void		translation_controls(bool *changed);
+void		rotation_controls(bool *changed);
 void		rebuild_projection(void);
 void		reset_projection(bool *changed);
 void		rebuild_image(void);

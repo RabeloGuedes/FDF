@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 14:10:25 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/13 14:56:33 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:25:31 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,15 @@ void	draw_horizontal_lines(void)
 	while (head)
 	{
 		prev = head;
+		if (prev->y > map()->win->win_h)
+			break ;
 		while (head)
 		{
 			if (head->east)
 				head = head->east;
 			else
+				break ;
+			if (prev->x > map()->win->win_w)
 				break ;
 			draw_line(prev, head);
 			prev = head;

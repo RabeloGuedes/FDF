@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 17:48:43 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/12 15:29:23 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:22:15 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,13 @@ int	color_build(char *color)
 // This function creates a node with the coordenates
 t_node	*create_node(int altitude, int x, int y, int color)
 {
+	static int	id;
 	t_node	*new;
 
 	new = (t_node *)malloc(sizeof(t_node));
 	if (!new)
 		return (NULL);
+	new->id = id++;
 	new->z = altitude;
 	new->x = x;
 	new->y = y;
