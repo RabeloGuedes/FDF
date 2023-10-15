@@ -6,26 +6,54 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 08:57:44 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/13 15:40:13 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:00:08 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+void	calculate_center(double *x_center, double *y_center)
+{
+	double	x_sum;
+	double	y_sum;
+	t_node	*head;
+	t_node	*save;
+
+	x_sum = 0.0;
+	y_sum = 0.0;
+	head = map()->head;
+	save = head;
+	while (head)
+	{
+		while (head)
+		{
+			x_sum += head->x;
+			y_sum += head->y;
+			head = head->east;
+		}
+		save = save->south;
+		head = save;
+	}
+	*x_center = x_sum / map()->coor->size;
+	*y_center = y_sum / map()->coor->size;
+}
+
 void	rescale_projection(double sf)
 {
 	t_node	*head;
 	t_node	*save;
+	double	x_center;
+	double	y_center;
 
+	calculate_center(&x_center, &y_center);
 	head = map()->head;
 	while (head)
 	{
 		save = head;
 		while (head)
 		{
-			head->x *= sf;
-			head->y *= sf;
-			head->z *= sf;
+			head->x = (head->x - x_center) * sf + x_center;
+			head->y = (head->y - y_center) * sf + y_center;
 			head = head->east;
 		}
 		save = save->south;
@@ -35,6 +63,9 @@ void	rescale_projection(double sf)
 
 void	zoom_controls(bool *changed)
 {
+	t_node	*head;
+
+	head = map()->head;
 	if (map()->keys.zoom_in)
 		rescale_projection(1.1);
 	else if (map()->keys.zoom_out)
@@ -43,8 +74,8 @@ void	zoom_controls(bool *changed)
 		return ;
 	set_new_max_xy();
 	set_new_min_xy();
-	if (map()->coor->center_switch)
-		center_map();
+	// if (map()->coor->center_switch)
+	// 	center_map();
 	*changed = true;
 }
 
@@ -58,9 +89,6 @@ void	translation_controls(bool *changed)
 		apply_mod(50, 'y');
 	else if (map()->keys.up)
 		apply_mod(-50, 'y');
-	else
-		return ;
-	map()->coor->center_switch = 0;
 	*changed = true;
 }
 
@@ -93,15 +121,25 @@ void	rotation_controls(bool *changed)
 	*changed = true;
 }
 
-int	central_control()
+int	central_control(void)
 {
 	bool		changed;
 
 	changed = false;
-	rotation_controls(&changed);
-	translation_controls(&changed);
-	zoom_controls(&changed);
-	reset_projection(&changed);
+	if (map()->keys.d || map()->keys.a
+		|| map()->keys.w || map()->keys.s
+		|| map()->keys.e || map()->keys.q)
+		rotation_controls(&changed);
+	else if (map()->keys.up || map()->keys.down
+		|| map()->keys.right || map()->keys.left)
+		{
+			translation_controls(&changed);
+			calculate_center(&map()->coor->x_center, &map()->coor->y_center);
+		}
+	else if (map()->keys.zoom_in || map()->keys.zoom_out)
+		zoom_controls(&changed);
+	else if (map()->keys.reset)
+		reset_projection(&changed);
 	if (changed)
 		rebuild_image();
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 12:23:08 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/13 15:21:38 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/15 17:33:15 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,23 +113,27 @@ typedef struct s_window_infos
 
 typedef struct s_coor
 {
-	double	x;
-	double	y;
-	double	delta_x;
-	double	delta_y;
-	double	max_x;
-	double	max_y;
-	double	max_z;
-	double	min_x;
-	double	min_y;
-	double	min_z;
-	double	angle_x;
-	double	angle_y;
-	double	angle_z;
-	double	range_x;
-	double	range_y;
-	double	range_z;
-	int		center_switch;
+	double					x;
+	double					y;
+	double					delta_x;
+	double					delta_y;
+	double					max_x;
+	double					max_y;
+	double					max_z;
+	double					min_x;
+	double					min_y;
+	double					min_z;
+	double					angle_x;
+	double					angle_y;
+	double					angle_z;
+	double					range_x;
+	double					range_y;
+	double					range_z;
+	double					x_center;
+	double					y_center;
+	double					new_x_center;
+	double					new_y_center;
+	unsigned long long		size;
 }				t_coor;
 
 typedef struct s_keybinds
@@ -207,6 +211,7 @@ void		set_new_max_xy(void);
 void		set_new_min_xy(void);
 double		rad_clamp(double val);
 void		rescale_projection(double sf);
+void		calculate_center(double *x_center, double *y_center);
 // projection
 
 // queue
