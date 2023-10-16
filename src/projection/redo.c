@@ -6,12 +6,14 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:25:10 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/15 16:01:13 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/16 17:28:36 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+// This function set the projection to the
+// original and flat version
 void	reset_projection(bool *changed)
 {
 	t_node	*head;
@@ -31,12 +33,14 @@ void	reset_projection(bool *changed)
 		prev = prev->south;
 		head = prev;
 	}
-	// map()->coor->center_switch = 1;
 	rebuild_projection();
 	center_map();
 	*changed = true;
 }
 
+// This function erases the pixels of the 
+// previous projection and redraws the new
+// coordinates on the image
 void	rebuild_image(void)
 {
 	ft_bzero(map()->win->addr,

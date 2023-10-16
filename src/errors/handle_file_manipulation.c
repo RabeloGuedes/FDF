@@ -6,12 +6,15 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 09:06:16 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/03 16:12:54 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/16 16:41:25 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+// This function checks if the file can be opened
+// exists and the user has necessary privillege
+// to open it
 int	handle_open(char *file_name)
 {
 	int	fd;
@@ -26,6 +29,8 @@ int	handle_open(char *file_name)
 	return (fd);
 }
 
+// This function checks if the file can be closed,
+// in case it exists and it's opened
 void	handle_close(int fd)
 {
 	if (close(fd) == -1)

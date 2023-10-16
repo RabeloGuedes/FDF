@@ -6,12 +6,14 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 17:17:58 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/09/29 10:23:57 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/16 20:06:59 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+// This function frees the array elements
+// and at the end itself
 void	free_split(char **array)
 {
 	int	i;
@@ -25,6 +27,8 @@ void	free_split(char **array)
 	}
 }
 
+// This function searchs for the last line
+// and saves the reference at head and previous
 void	check_south(t_node	**head, t_node **previous)
 {
 	*previous = *head;
@@ -38,6 +42,8 @@ void	check_south(t_node	**head, t_node **previous)
 		*previous = *head;
 }
 
+// This function searchs for the last lines node
+// and saves the reference at head and previous
 void	check_east(t_node **head, t_node **previous)
 {
 	while ((*head)->east)
@@ -52,6 +58,8 @@ void	check_east(t_node **head, t_node **previous)
 		(*previous)->east = NULL;
 }
 
+// This function runs throughout all nodes
+// and free from the last to the first
 void	free_nodes(void)
 {
 	t_node	*head;
@@ -69,5 +77,21 @@ void	free_nodes(void)
 		check_east(&head, &previous);
 		free(head);
 		head = map()->head;
+	}
+}
+
+void	free_project(void)
+{
+	t_matrix	*map_ref;
+
+	map_ref = map();
+	if (map_ref->win)
+	{
+		if (map_ref->win->mlx && map_ref->win->img)
+		{
+			mlx_destroy_image(map_ref->win->mlx, map_ref->win->img);
+			mlx_destroy_display(map_ref->win->mlx);
+			free(map_ref->win->mlx);
+		}
 	}
 }

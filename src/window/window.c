@@ -6,12 +6,13 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:18:27 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/13 15:29:56 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/16 17:49:27 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+// It initalizes the window struct
 void	window_init(void)
 {
 	static t_win	window;
@@ -22,6 +23,9 @@ void	window_init(void)
 		&map()->win->win_w, &map()->win->win_h);
 }
 
+// It draws a pixel on a specific
+// coordiantes with a color passed
+// as parameter
 void	put_pixel(int x, int y, int color)
 {
 	char	*dst;
@@ -34,6 +38,8 @@ void	put_pixel(int x, int y, int color)
 	}
 }
 
+// Draws all the pixels of the projection
+// into the image
 void	put_pixels_on_img(void)
 {
 	t_node	*head;
@@ -57,6 +63,8 @@ void	put_pixels_on_img(void)
 	}
 }
 
+// This is the main function of the 
+// window, it configures its behavior
 void	window(void)
 {
 	t_matrix	*map_ref;

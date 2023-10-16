@@ -6,12 +6,14 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 09:43:50 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/11 15:06:42 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/16 17:36:48 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+// This function checks whether the file name 
+// is properly formatted or not
 int	file_name_checker(char *file_name)
 {
 	int	len;

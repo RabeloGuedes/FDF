@@ -6,38 +6,14 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 08:57:44 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/15 18:00:08 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/16 17:50:08 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	calculate_center(double *x_center, double *y_center)
-{
-	double	x_sum;
-	double	y_sum;
-	t_node	*head;
-	t_node	*save;
-
-	x_sum = 0.0;
-	y_sum = 0.0;
-	head = map()->head;
-	save = head;
-	while (head)
-	{
-		while (head)
-		{
-			x_sum += head->x;
-			y_sum += head->y;
-			head = head->east;
-		}
-		save = save->south;
-		head = save;
-	}
-	*x_center = x_sum / map()->coor->size;
-	*y_center = y_sum / map()->coor->size;
-}
-
+// This function applies the zoom effect
+// based on the projection center
 void	rescale_projection(double sf)
 {
 	t_node	*head;
@@ -61,6 +37,7 @@ void	rescale_projection(double sf)
 	}
 }
 
+// This function controls the zoom in and out
 void	zoom_controls(bool *changed)
 {
 	t_node	*head;
@@ -74,11 +51,10 @@ void	zoom_controls(bool *changed)
 		return ;
 	set_new_max_xy();
 	set_new_min_xy();
-	// if (map()->coor->center_switch)
-	// 	center_map();
 	*changed = true;
 }
 
+// This function controls the translation
 void	translation_controls(bool *changed)
 {
 	if (map()->keys.left)
@@ -92,6 +68,7 @@ void	translation_controls(bool *changed)
 	*changed = true;
 }
 
+// This function controls the rotations
 void	rotation_controls(bool *changed)
 {
 	double		nangle_x;
@@ -121,6 +98,7 @@ void	rotation_controls(bool *changed)
 	*changed = true;
 }
 
+// This function handles of other controls
 int	central_control(void)
 {
 	bool		changed;
@@ -132,10 +110,10 @@ int	central_control(void)
 		rotation_controls(&changed);
 	else if (map()->keys.up || map()->keys.down
 		|| map()->keys.right || map()->keys.left)
-		{
-			translation_controls(&changed);
-			calculate_center(&map()->coor->x_center, &map()->coor->y_center);
-		}
+	{
+		translation_controls(&changed);
+		calculate_center(&map()->coor->x_center, &map()->coor->y_center);
+	}
 	else if (map()->keys.zoom_in || map()->keys.zoom_out)
 		zoom_controls(&changed);
 	else if (map()->keys.reset)
@@ -143,51 +121,4 @@ int	central_control(void)
 	if (changed)
 		rebuild_image();
 	return (0);
-}
-
-int	handle_keybinds(int key_code, bool pressed)
-{
-	if (key_code == LINUX_ESC_KEYCODE)
-	{
-		mlx_destroy_window(map()->win->mlx, map()->win->mlx_win);
-		free_nodes();
-		exit(EXIT_SUCCESS);
-	}
-	else if (key_code == KEY_LEFT)
-		map()->keys.left = pressed;
-	else if (key_code == KEY_RIGHT)
-		map()->keys.right = pressed;
-	else if (key_code == KEY_DOWN)
-		map()->keys.down = pressed;
-	else if (key_code == KEY_UP)
-		map()->keys.up = pressed;
-	else if (key_code == KEY_W)
-		map()->keys.w = pressed;
-	else if (key_code == KEY_A)
-		map()->keys.a = pressed;
-	else if (key_code == KEY_D)
-		map()->keys.d = pressed;
-	else if (key_code == KEY_S)
-		map()->keys.s = pressed;
-	else if (key_code == KEY_E)
-		map()->keys.e = pressed;
-	else if (key_code == KEY_Q)
-		map()->keys.q = pressed;
-	else if (key_code == KEY_ZOOM_IN)
-		map()->keys.zoom_in = pressed;
-	else if (key_code == KEY_ZOOM_OUT)
-		map()->keys.zoom_out = pressed;
-	else if (key_code == KEY_RESET)
-		map()->keys.reset = pressed;
-	return (0);
-}
-
-int	on_key_pressed(int key_code)
-{
-	return (handle_keybinds(key_code, true));
-}
-
-int	on_key_released(int key_code)
-{
-	return (handle_keybinds(key_code, false));
 }

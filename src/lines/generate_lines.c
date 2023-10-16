@@ -6,15 +6,19 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 18:16:45 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/05 11:46:51 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/16 20:22:33 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+// This function is the first part of the generate_lines
 void	generate_line_phase_1(char **line, char ***array)
 {
-	if (!(*array))
+	static int	i;
+
+	i++;
+	if (!(*array) || i == 4)
 	{
 		free(*line);
 		malloc_error();
@@ -22,6 +26,8 @@ void	generate_line_phase_1(char **line, char ***array)
 	free(*line);
 }
 
+// This function uses the result of the get_next_line
+// splitted to generate nodes
 void	generate_line_phase_2(int fd, char **line, char ***array, int *y)
 {
 	if (!convert_line_into_coordinates((*array), (*y)++))
@@ -34,6 +40,7 @@ void	generate_line_phase_2(int fd, char **line, char ***array, int *y)
 	*array = ft_split(*line, ' ');
 }
 
+// This function generate lines using get_next_line
 void	generate_lines(int fd)
 {
 	char	*line;

@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:45:41 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/15 17:20:18 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/16 18:10:13 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,34 @@ int	convert_line_into_coordinates(char **array, int y)
 	return (1);
 }
 
+// This function sets ranges of
+// all three axes, x, y, and z
+void	set_ranges(void)
+{
+	double		max_range;
+	t_matrix	*map_ref;
+
+	map_ref = map();
+	map_ref->coor->range_x = map_ref->coor->max_x - map_ref->coor->min_x;
+	map_ref->coor->range_y = map_ref->coor->max_y - map_ref->coor->min_y;
+	map_ref->coor->range_z = map_ref->coor->max_z - map_ref->coor->min_z;
+	max_range = fmax(map_ref->coor->range_x, map_ref->coor->range_y);
+	map_ref->coor->max_range = fmax(max_range, map_ref->coor->range_z);
+}
+
 // This function calculates the scale factor
 // based on the window's and file's measurements
 void	get_scaling_factor(void)
 {
-	double	max_range;
+	double		ratio_width;
+	double		ratio_height;
+	t_matrix	*map_ref;
 
-	map()->coor->range_x = map()->coor->max_x - map()->coor->min_x;
-	map()->coor->range_y = map()->coor->max_y - map()->coor->min_y;
-	map()->coor->range_z = map()->coor->max_z - map()->coor->min_z;
-	max_range = fmax(fmax(map()->coor->range_x, map()->coor->range_y),map()->coor->range_z);
-	map()->sf = fmin(map()->win->win_w / max_range, map()->win->win_h / max_range);
+	set_ranges();
+	map_ref = map();
+	ratio_height = map_ref->win->win_h / map_ref->coor->max_range;
+	ratio_width = map_ref->win->win_w / map_ref->coor->max_range;
+	map_ref->sf = fmin(ratio_width, ratio_height);
 }
 
 // This function calls the scale factor function
@@ -79,7 +96,7 @@ void	get_matrix(char *file_name)
 	set_z_max_min();
 	get_scaling_factor();
 	expand_map();
-	apply_rotation(map()->coor->angle_x,
-		map()->coor->angle_y, map()->coor->angle_z);
+	apply_rotation(0.5,
+		-0.5, map()->coor->angle_z);
 	center_map();
 }

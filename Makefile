@@ -20,7 +20,7 @@ UTILS_FILES = $(UTILS_DIR)file_name_checker.c $(UTILS_DIR)free_data_structures.c
 
 PROJECTION_DIR = projection/
 PROJECTION_FILES = 	$(PROJECTION_DIR)center_projection.c $(PROJECTION_DIR)controls.c $(PROJECTION_DIR)rebuild_projection.c\
-					$(PROJECTION_DIR)rotate_grid.c $(PROJECTION_DIR)set_ranges.c $(PROJECTION_DIR)redo.c
+					$(PROJECTION_DIR)rotate_grid.c $(PROJECTION_DIR)set_values.c $(PROJECTION_DIR)redo.c $(PROJECTION_DIR)keys.c
 
 QUEUE_DIR = queue/
 QUEUE_FILES = $(QUEUE_DIR)node.c $(QUEUE_DIR)queue.c

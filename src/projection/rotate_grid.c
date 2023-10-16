@@ -6,12 +6,14 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:30:09 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/15 17:59:57 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/16 17:30:26 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+// This function applies the rotation
+// the projection along the x-axis 
 void	rotate_x(t_node *node, double angle_x)
 {
 	double	new_y;
@@ -23,6 +25,8 @@ void	rotate_x(t_node *node, double angle_x)
 	node->z = new_z;
 }
 
+// This function applies the rotation
+// the projection along the y-axis 
 void	rotate_y(t_node *node, double angle_y)
 {
 	double	new_x;
@@ -34,6 +38,8 @@ void	rotate_y(t_node *node, double angle_y)
 	node->z = new_z;
 }
 
+// This function applies the rotation
+// the projection along the z-axis 
 void	rotate_z(t_node *node, double angle_z)
 {
 	double	new_x;
@@ -45,6 +51,8 @@ void	rotate_z(t_node *node, double angle_z)
 	node->y = new_y;
 }
 
+// This function applies the rotations along the 3
+// possible axes, x, y, and z
 void	apply_rotation(double angle_x, double angle_y, double angle_z)
 {
 	t_node	*head;
