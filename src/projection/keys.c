@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:09:14 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/16 20:04:56 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/17 14:16:24 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	handle_keybinds(int key_code, bool pressed)
 {
 	if (key_code == LINUX_ESC_KEYCODE)
 	{
-		mlx_destroy_window(map()->win->mlx, map()->win->mlx_win);
 		free_project();
 		free_nodes();
 		exit(EXIT_SUCCESS);

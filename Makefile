@@ -8,7 +8,7 @@ MINILIBX = .minilibx-linux/libmlx.a
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address,undefined
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address,undefined
 INC_FLAGS = -I ./inc -I $(LIBFT_DIR)/inc -I $(MINILIBX_DIR)/
 PROGRAM_LIBS = -L$(LIBFT_DIR) -lft -L$(MINILIBX_DIR) -lmlx_Linux -L/usr/lib -lXext -lX11 -lz -lm 
 

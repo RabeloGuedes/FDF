@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 17:17:58 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/16 20:06:59 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/17 14:53:09 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	free_nodes(void)
 	}
 }
 
+// This function free all the 
+// memory allocated by mlx
 void	free_project(void)
 {
 	t_matrix	*map_ref;
@@ -87,9 +89,12 @@ void	free_project(void)
 	map_ref = map();
 	if (map_ref->win)
 	{
-		if (map_ref->win->mlx && map_ref->win->img)
+		if (map_ref->win->mlx)
 		{
-			mlx_destroy_image(map_ref->win->mlx, map_ref->win->img);
+			if (map_ref->win->mlx_win)
+				mlx_destroy_window(map_ref->win->mlx, map_ref->win->mlx_win);
+			if (map_ref->win->img)
+				mlx_destroy_image(map_ref->win->mlx, map_ref->win->img);
 			mlx_destroy_display(map_ref->win->mlx);
 			free(map_ref->win->mlx);
 		}

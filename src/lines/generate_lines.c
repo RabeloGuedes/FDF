@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 18:16:45 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/16 20:22:33 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/17 14:44:31 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,10 @@
 // This function is the first part of the generate_lines
 void	generate_line_phase_1(char **line, char ***array)
 {
-	static int	i;
-
-	i++;
-	if (!(*array) || i == 4)
+	if (!(*array))
 	{
 		free(*line);
-		malloc_error();
+		malloc_error();		
 	}
 	free(*line);
 }
