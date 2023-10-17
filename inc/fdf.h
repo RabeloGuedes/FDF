@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 12:23:08 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/16 18:44:31 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:45:15 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,22 @@
 # include <math.h>
 # include <fcntl.h>
 # include <errno.h>
+
+# ifndef ZOOM_IN_RATIO
+#  define ZOOM_IN_RATIO 1.015
+# endif
+
+# ifndef ZOOM_OUT_RATIO
+#  define ZOOM_OUT_RATIO 0.965
+# endif
+
+# ifndef TRANSLATION_RATIO
+#  define TRANSLATION_RATIO 5
+# endif
+
+# ifndef ROTATION_RATIO
+#  define ROTATION_RATIO 0.010
+# endif
 
 # ifndef M_PI
 #  define M_PI 3.141592653589793
@@ -125,9 +141,6 @@ typedef struct s_coor
 	double					min_x;
 	double					min_y;
 	double					min_z;
-	double					angle_x;
-	double					angle_y;
-	double					angle_z;
 	double					range_x;
 	double					range_y;
 	double					range_z;

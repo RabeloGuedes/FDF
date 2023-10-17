@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:45:41 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/16 18:10:13 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:19:44 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,12 @@ int	convert_line_into_coordinates(char **array, int y)
 	i = 0;
 	x = 0;
 	while (array[i])
+	{
+		if (*array[i] == '\n')
+			break ;
 		if (!build_node(array[i++], x++, y))
 			return (0);
+	}
 	map()->coor->max_x = x;
 	return (1);
 }
@@ -70,9 +74,9 @@ void	expand_map(void)
 	save = current;
 	while (current)
 	{
-		current->x *= map()->sf;
-		current->y *= map()->sf;
-		current->z *= map()->sf;
+		current->x *= map()->sf / 1.6;
+		current->y *= map()->sf / 1.6;
+		current->z *= map()->sf / 1.6;
 		if (!current->east)
 		{
 			save = save->south;
@@ -96,7 +100,7 @@ void	get_matrix(char *file_name)
 	set_z_max_min();
 	get_scaling_factor();
 	expand_map();
-	apply_rotation(0.5,
-		-0.5, map()->coor->angle_z);
+	apply_rotation(1,
+		-0.8, 0.2);
 	center_map();
 }

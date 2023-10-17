@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 08:57:44 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/16 17:50:08 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:46:50 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	zoom_controls(bool *changed)
 
 	head = map()->head;
 	if (map()->keys.zoom_in)
-		rescale_projection(1.1);
+		rescale_projection(ZOOM_IN_RATIO);
 	else if (map()->keys.zoom_out)
-		rescale_projection(0.9);
+		rescale_projection(ZOOM_OUT_RATIO);
 	else
 		return ;
 	set_new_max_xy();
@@ -58,42 +58,42 @@ void	zoom_controls(bool *changed)
 void	translation_controls(bool *changed)
 {
 	if (map()->keys.left)
-		apply_mod(50, 'x');
+		apply_mod(TRANSLATION_RATIO, 'x');
 	else if (map()->keys.right)
-		apply_mod(-50, 'x');
+		apply_mod(-TRANSLATION_RATIO, 'x');
 	else if (map()->keys.down)
-		apply_mod(50, 'y');
+		apply_mod(TRANSLATION_RATIO, 'y');
 	else if (map()->keys.up)
-		apply_mod(-50, 'y');
+		apply_mod(-TRANSLATION_RATIO, 'y');
 	*changed = true;
 }
 
 // This function controls the rotations
 void	rotation_controls(bool *changed)
 {
-	double		nangle_x;
-	double		nangle_y;
-	double		nangle_z;
+	double	nangle_x;
+	double	nangle_y;
+	double	nangle_z;
 
-	nangle_x = map()->coor->angle_x;
-	nangle_y = map()->coor->angle_y;
-	nangle_z = map()->coor->angle_z;
+	nangle_x = 0;
+	nangle_y = 0;
+	nangle_z = 0;
 	if (map()->keys.d)
-		nangle_z += 0.1;
+		nangle_z = ROTATION_RATIO;
 	else if (map()->keys.a)
-		nangle_z -= 0.1;
+		nangle_z = -ROTATION_RATIO;
 	else if (map()->keys.w)
-		nangle_x += 0.1;
+		nangle_x = ROTATION_RATIO;
 	else if (map()->keys.s)
-		nangle_x -= 0.1;
+		nangle_x = -ROTATION_RATIO;
 	else if (map()->keys.q)
-		nangle_y -= 0.1;
+		nangle_y = -ROTATION_RATIO;
 	else if (map()->keys.e)
-		nangle_y += 0.1;
+		nangle_y = ROTATION_RATIO;
 	else
 		return ;
-	apply_rotation(rad_clamp(nangle_x),
-		rad_clamp(nangle_y), rad_clamp(nangle_z));
+	apply_rotation(nangle_x,
+		nangle_y, nangle_z);
 	center_map();
 	*changed = true;
 }

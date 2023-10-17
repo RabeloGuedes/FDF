@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:18:27 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/16 17:49:27 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:41:49 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,8 @@ void	put_pixels_on_img(void)
 	save = head;
 	while (head)
 	{
-		if (head->y >= map()->win->win_h)
-			break ;
 		while (head)
 		{
-			if (head->x >= map()->win->win_w)
-				break ;
 			put_pixel(head->x, head->y, head->color);
 			head = head->east;
 		}
