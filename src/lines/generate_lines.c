@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 18:16:45 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/17 14:44:31 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/18 15:48:12 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	generate_line_phase_1(char **line, char ***array)
 	if (!(*array))
 	{
 		free(*line);
-		malloc_error();		
+		malloc_error();
 	}
 	free(*line);
 }
@@ -27,7 +27,7 @@ void	generate_line_phase_1(char **line, char ***array)
 // splitted to generate nodes
 void	generate_line_phase_2(int fd, char **line, char ***array, int *y)
 {
-	if (!convert_line_into_coordinates((*array), (*y)++))
+	if (**array[0] != '\n' && !convert_line_into_coordinates((*array), (*y)++))
 	{
 		free_split(*array);
 		malloc_error();

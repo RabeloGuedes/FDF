@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 09:06:16 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/16 16:41:25 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/18 15:47:30 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	handle_open(char *file_name)
 	{
 		ft_putstr_fd("Error: File can't be opened, it might not exists! ", 2);
 		ft_putendl_fd("Exiting...", 2);
+		malloc_error();
 		exit(EXIT_FAILURE);
 	}
 	return (fd);
