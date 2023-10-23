@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:45:41 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/17 17:19:44 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/23 13:04:46 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	get_matrix(char *file_name)
 	int		fd;
 
 	fd = handle_open(file_name);
+	window_init();
 	generate_lines(fd);
 	handle_close(fd);
 	set_new_max_xy();

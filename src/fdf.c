@@ -6,7 +6,7 @@
 /*   By: arabelo- <arabelo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 11:57:56 by arabelo-          #+#    #+#             */
-/*   Updated: 2023/10/17 17:23:28 by arabelo-         ###   ########.fr       */
+/*   Updated: 2023/10/23 13:04:51 by arabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 			exit(EXIT_FAILURE);
 		}
 		map()->coor = &coor;
-		window_init();
+		// window_init();
 		get_matrix(av[1]);
 		window();
 		free_nodes();
